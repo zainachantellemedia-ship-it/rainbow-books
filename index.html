@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Rainbow Books</title><meta name="description" content="Rainbow Books website prototype (ISYS1051 case study)"><style>:root{color-scheme:light}body{margin:0}[hidden]{display:none!important}</style>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#f3f5f8;--surface:#ffffff;--fg:#14213d;--muted:#55627a;--line:#d5dbe6;--accent:#1d3a8a;--accent-fg:#ffffff;--ok:#1f7a4d;--warn:#a65a00;--soft:#e7ecf6;
+--c1:#d7263d;--c2:#f46036;--c3:#f2b705;--c4:#2e933c;--c5:#1b7fc4;--c6:#6c3fb5;--r:10px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1424;--surface:#161e33;--fg:#e8ecf5;--muted:#9aa7c0;--line:#2a3555;--accent:#8fb0ff;--accent-fg:#0e1424;--ok:#5fd09a;--warn:#f0b35c;--soft:#1d2744;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1424;--surface:#161e33;--fg:#e8ecf5;--muted:#9aa7c0;--line:#2a3555;--accent:#8fb0ff;--accent-fg:#0e1424;--ok:#5fd09a;--warn:#f0b35c;--soft:#1d2744;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 "Instrument Sans",system-ui,sans-serif;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+h1,h2,h3,.serif{font-family:"Libre Caslon Text",Georgia,serif;text-wrap:balance;line-height:1.2;margin:0}
+a{color:var(--accent)}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1080px;margin:0 auto}
+.proto{background:var(--fg);color:var(--bg);font-size:13px;text-align:center;padding:6px 8px;margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)))}
+.spine{height:6px;background:linear-gradient(90deg,var(--c1) 0 16.6%,var(--c2) 0 33.3%,var(--c3) 0 50%,var(--c4) 0 66.6%,var(--c5) 0 83.3%,var(--c6) 0)}
+header.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding-block:14px}
+.brand{background:none;border:0;cursor:pointer;text-align:left;padding:0}
+.brand b{font-family:"Libre Caslon Text",serif;font-size:26px;display:block;line-height:1}
+.brand small{color:var(--muted);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+nav{display:flex;flex-wrap:wrap;gap:4px 14px;flex:1}
+nav button{background:none;border:0;padding:6px 2px;cursor:pointer;color:var(--fg);border-bottom:2px solid transparent}
+nav button[aria-current=page]{border-color:var(--accent);font-weight:600}
+.search{display:flex;gap:6px;flex:1 1 260px;max-width:420px}
+.search input{flex:1;min-width:0;padding:9px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.btn{background:var(--accent);color:var(--accent-fg);border:0;border-radius:var(--r);padding:10px 16px;cursor:pointer;font-weight:600}
+.btn.alt{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.cartbtn{position:relative}
+.badge{background:var(--c1);color:#fff;border-radius:99px;font-size:12px;padding:1px 7px;margin-left:6px}
+main{padding-block:20px 48px;min-height:60vh}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;padding-block:18px 30px}
+.hero h1{font-size:clamp(30px,5vw,48px)}
+.hero p{color:var(--muted);max-width:52ch}
+.shelf{display:flex;gap:6px;align-items:flex-end;height:220px;padding:0 10px;border-bottom:10px solid var(--fg);border-radius:2px}
+.shelf i{display:block;border-radius:3px 3px 0 0;width:7%;min-width:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.cover{aspect-ratio:2/3;border-radius:4px 8px 8px 4px;padding:12px 10px 10px 16px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;box-shadow:inset 6px 0 0 rgba(0,0,0,.25);overflow:hidden;max-width:100%}
+.cover b{font-family:"Libre Caslon Text",serif;font-size:16px;line-height:1.15}
+.cover span{font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.9}
+.card h3{font-size:16px}
+.muted{color:var(--muted)}
+.price{font-weight:600}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.space{justify-content:space-between}
+.sec{margin-top:34px}
+.sec>h2{font-size:24px;margin-bottom:14px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.two{display:grid;grid-template-columns:minmax(180px,260px) 1fr;gap:28px}
+.pill{display:inline-block;border-radius:99px;font-size:12px;padding:2px 10px;background:var(--soft)}
+.ok{color:var(--ok)}.warn{color:var(--warn)}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tablewrap{overflow-x:auto}
+label{display:block;font-weight:600;font-size:14px;margin-bottom:4px}
+.field{margin-bottom:14px}
+.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--bg)}
+.radio{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);margin-bottom:8px;cursor:pointer;background:var(--bg)}
+.radio input{margin-top:4px;width:auto!important;flex:none}
+.radio.on{border-color:var(--accent);background:var(--soft)}
+.steps{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;padding:0;list-style:none}
+.steps li{font-size:13px;padding:4px 12px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.steps li.now{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.steps li.done{color:var(--ok);border-color:var(--ok)}
+.err{color:var(--c1);font-size:13px;margin-top:4px}
+.cols{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+.sum td{border:0;padding:4px 0}
+.sum tr.t td{border-top:1px solid var(--line);font-weight:700;padding-top:10px}
+.note{border-left:4px solid var(--c3);background:var(--soft);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;font-size:14px}
+footer{border-top:1px solid var(--line);padding-block:22px;color:var(--muted);font-size:13px}
+.tick{width:56px;height:56px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-size:30px}
+@media(max-width:760px){.hero,.two,.cols{grid-template-columns:1fr}.shelf{height:140px}.two .cover{max-width:180px}}
+</style>
+
+</head><body><div class="proto">Course prototype for ISYS1051 – fictional case study (Rainbow Books). No orders are placed and no payment is taken.</div>
+<div class="spine"></div>
+<div class="wrap">
+<header class="top">
+  <button class="brand" data-go="home"><b>Rainbow Books</b><small>Collins Street since 1946</small></button>
+  <nav aria-label="Main" id="nav"></nav>
+  <form class="search" id="sform" role="search"><input id="q" type="search" placeholder="Search title, author or ISBN" aria-label="Search books"><button class="btn" type="submit">Search</button></form>
+  <button class="btn alt cartbtn" data-go="cart">Cart<span class="badge" id="cc">0</span></button>
+</header>
+<main id="app" aria-live="polite"></main>
+<footer>
+  <div class="row space"><span>Rainbow Books Integrated Information System (RBIS) – web prototype, Week 11.</span><button class="btn alt" id="theme" type="button">Switch theme</button></div>
+  <p>"Books at the end of the rainbow." Titles, authors and stock levels are invented for the prototype.</p>
+</footer>
+</div>
+
+<script>
+const COLS=["#d7263d","#c4511b","#9a6b00","#2e7d32","#1b6aa5","#5b3a9d","#8a2b6b","#12636b"];
+const BOOKS=[
+{id:1,t:"The Lantern Keepers of Flinders Lane",a:"Marian Kellett",g:"Fiction",p:32.99,s:"Paperback",d:"A lamplighter's daughter inherits a laneway bookshop and the secrets stored in its cellar. Set in 1920s Melbourne.",isbn:"9780000000011",age:"Adult",st:{CBD:6,Carlton:2,Malvern:0,Geelong:4}},
+{id:2,t:"Salt Country",a:"Tomas Reid",g:"Fiction",p:29.99,s:"Paperback",d:"Three generations, one failing sheep station and a drought that will not break.",isbn:"9780000000028",age:"Adult",st:{CBD:3,Carlton:0,Malvern:5,Geelong:1}},
+{id:3,t:"Pip and the Paper Moon",a:"Lena Okafor",g:"Children's",p:17.99,s:"Hardcover",d:"Pip folds a paper moon to light the way home. A bedtime picture book for ages 3–6.",isbn:"9780000000035",age:"3–6",st:{CBD:9,Carlton:7,Malvern:4,Geelong:8}},
+{id:4,t:"Cartographers of the Quiet Sea",a:"J. R. Whitlock",g:"Young adult",p:22.99,s:"Paperback",d:"A mapmaker's apprentice discovers the coastline is moving. Ages 13+.",isbn:"9780000000042",age:"13+",st:{CBD:5,Carlton:3,Malvern:2,Geelong:0}},
+{id:5,t:"Seven Weeks of Sourdough",a:"Priya Nandakumar",g:"Cooking",p:44.95,s:"Hardcover",d:"A patient, practical guide to starters, crusts and the long ferment.",isbn:"9780000000059",age:"Adult",st:{CBD:4,Carlton:4,Malvern:6,Geelong:2}},
+{id:6,t:"The Ledger of Small Mercies",a:"Hannah Voss",g:"Crime",p:27.99,s:"Paperback",d:"A bookkeeper in 1950s Ballarat finds a column of numbers that should not add up.",isbn:"9780000000066",age:"Adult",st:{CBD:2,Carlton:1,Malvern:3,Geelong:0}},
+{id:7,t:"Wattle and Wire",a:"Dr Alan Thorne",g:"History",p:49.99,s:"Hardcover",d:"How fencing, fire and federation shaped Victoria's colonial landscape.",isbn:"9780000000073",age:"Adult",st:{CBD:3,Carlton:0,Malvern:0,Geelong:2}},
+{id:8,t:"Mira Moon and the Midnight Library",a:"Lena Okafor",g:"Children's",p:15.99,s:"Paperback",d:"Mira's school library opens at midnight – but only for those who whisper. Ages 7–10.",isbn:"9780000000080",age:"7–10",st:{CBD:8,Carlton:5,Malvern:3,Geelong:6}}
+];
+const STORES={CBD:{n:"Collins Street (flagship)",addr:"Collins Street, Melbourne VIC",type:"Company store",hrs:"Mon–Sat 9–6, Sun 10–5"},Carlton:{n:"Carlton",addr:"Lygon Street, Carlton VIC",type:"Company store",hrs:"Daily 9–6"},Malvern:{n:"Malvern",addr:"Glenferrie Road, Malvern VIC",type:"Franchise store",hrs:"Mon–Sat 9–5:30"},Geelong:{n:"Geelong",addr:"Moorabool Street, Geelong VIC",type:"Franchise store",hrs:"Mon–Sun 9–5"}};
+const EVENTS=[{d:"Sat 24 Oct, 11 am",t:"Story time with Lena Okafor",w:"CBD",k:"Children's",x:"Pip and the Paper Moon read-aloud and craft. Free; bookings essential."},{d:"Thu 29 Oct, 6:30 pm",t:"Author signing: Marian Kellett",w:"CBD",k:"Signing",x:"The Lantern Keepers of Flinders Lane. Wine and a short reading."},{d:"Sat 7 Nov, 2 pm",t:"Young adult writers' workshop",w:"Carlton",k:"Young adult",x:"Ages 13–17. Build a map, then write the story that happens on it."},{d:"Wed 18 Nov, 7 pm",t:"Book club: Salt Country",w:"Malvern",k:"Book club",x:"Franchise store event. Members get 10% off the title."}];
+const FREE=80, DELIV=9.95;
+const $=s=>document.querySelector(s);
+const money=n=>"$"+n.toFixed(2);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let S={view:"home",bookId:null,query:"",genre:"All",cart:[],mode:"deliver",store:"CBD",pay:"card",member:false,order:null,step:1,f:{}};
+try{const c=JSON.parse(localStorage.getItem("rb_cart")||"[]");if(Array.isArray(c))S.cart=c.filter(x=>BOOKS.some(b=>b.id===x.id))}catch(e){}
+function save(){try{localStorage.setItem("rb_cart",JSON.stringify(S.cart))}catch(e){}}
+function go(v,extra){Object.assign(S,{view:v},extra||{});render();window.scrollTo(0,0)}
+function cover(b){const c=COLS[(b.id-1)%COLS.length];return `<div class="cover" style="background:${c}"><span>${esc(b.g)}</span><b>${esc(b.t)}</b><span>${esc(b.a)}</span></div>`}
+function bookCard(b){return `<article class="card">${cover(b)}<h3>${esc(b.t)}</h3><div class="muted">${esc(b.a)}</div><div class="row space"><span class="price">${money(b.p)}</span><span class="pill">${esc(b.s)}</span></div><div class="row"><button class="btn alt" data-book="${b.id}">Details</button><button class="btn" data-add="${b.id}">Add</button></div></article>`}
+function sub(){return S.cart.reduce((s,i)=>s+BOOKS.find(b=>b.id===i.id).p*i.q,0)}
+function disc(){return S.member?sub()*0.1:0}
+function ship(){return S.mode==="collect"||sub()-disc()>=FREE?0:DELIV}
+function total(){return sub()-disc()+ship()}
+function total_n(){return S.cart.reduce((s,i)=>s+i.q,0)}
+function add(id){const i=S.cart.find(x=>x.id===id);if(i)i.q++;else S.cart.push({id,q:1});save();upd();toast("Added to cart")}
+function toast(m){let t=$("#toast");if(!t){t=document.createElement("div");t.id="toast";t.setAttribute("role","status");t.style.cssText="position:fixed;left:50%;transform:translateX(-50%);bottom:max(20px,env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:99px;z-index:20";document.body.appendChild(t)}t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,1600)}
+function upd(){$("#cc").textContent=total_n()}
+function nav(){const items=[["home","Home"],["browse","Browse books"],["stores","Stores"],["events","Events"],["publishing","Rainbow Publishing"],["franchise","Franchise portal"]];
+ $("#nav").innerHTML=items.map(([k,l])=>`<button data-go="${k}" ${S.view===k?'aria-current="page"':""}>${l}</button>`).join("")}
+function stockLine(b){return Object.entries(b.st).map(([k,v])=>`<tr><td>${STORES[k].n}</td><td>${v>3?'<span class="ok">In stock ('+v+')</span>':v>0?'<span class="warn">Low stock ('+v+')</span>':'<span class="muted">Out – can be transferred</span>'}</td><td>${STORES[k].type}</td></tr>`).join("")}
+
+const V={};
+V.home=()=>`<section class="hero"><div><span class="pill">Est. 1946 · Victoria's own bookseller</span><h1 style="margin-top:12px">Books at the end of the rainbow.</h1><p>Browse the whole Rainbow Books range, see what is on the shelf at 44 stores across Victoria, and have it delivered or ready to collect in an hour.</p><div class="row"><button class="btn" data-go="browse">Browse books</button><button class="btn alt" data-go="events">What's on in store</button></div></div><div class="shelf" aria-hidden="true">${[150,190,130,210,170,120,200,160,140,180,120,190].map((h,i)=>`<i style="height:${h*0.9}px;background:${COLS[i%8]}"></i>`).join("")}</div></section>
+<section class="sec"><h2>New and noted</h2><div class="grid">${BOOKS.slice(0,4).map(bookCard).join("")}</div></section>
+<section class="sec grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))"><div class="panel"><h3>Click and collect</h3><p class="muted">Choose a store at checkout. We'll hold your books at the counter for seven days.</p></div><div class="panel"><h3>Live store stock</h3><p class="muted">Every book page shows what each company and franchise store has on its shelves right now.</p></div><div class="panel"><h3>Write it, print it</h3><p class="muted">Rainbow Publishing helps first-time authors with editing, design and print on demand.</p></div></section>`;
+V.browse=()=>{const gs=["All",...new Set(BOOKS.map(b=>b.g))];const q=S.query.toLowerCase();const list=BOOKS.filter(b=>(S.genre==="All"||b.g===S.genre)&&(!q||(b.t+b.a+b.isbn).toLowerCase().includes(q)));
+ return `<h2 class="serif" style="font-size:30px;margin-bottom:14px">${S.query?'Results for "'+esc(S.query)+'"':"Browse books"}</h2><div class="row" style="margin-bottom:18px"><div class="field" style="margin:0"><label for="gsel">Category</label><select id="gsel">${gs.map(g=>`<option ${g===S.genre?"selected":""}>${esc(g)}</option>`).join("")}</select></div><span class="muted">${list.length} title${list.length===1?"":"s"}</span></div>${list.length?`<div class="grid">${list.map(bookCard).join("")}</div>`:`<div class="panel">No books match. Try another title or author.</div>`}`};
+V.book=()=>{const b=BOOKS.find(x=>x.id===S.bookId);return `<p><button class="btn alt" data-go="browse">Back to results</button></p><div class="two"><div>${cover(b)}</div><div><span class="pill">${esc(b.g)} · ${esc(b.s)} · Ages ${esc(b.age)}</span><h1 style="font-size:32px;margin:10px 0 4px">${esc(b.t)}</h1><p class="muted" style="margin:0">by ${esc(b.a)} · ISBN ${b.isbn}</p><p>${esc(b.d)}</p><p class="price" style="font-size:22px">${money(b.p)}</p><div class="row"><button class="btn" data-add="${b.id}">Add to cart</button><button class="btn alt" data-buy="${b.id}">Reserve for click and collect</button></div><h3 style="margin-top:22px;font-size:18px">Availability by store</h3><div class="tablewrap"><table><tr><th>Store</th><th>Stock</th><th>Type</th></tr>${stockLine(b)}</table></div></div></div>`};
+V.cart=()=>{if(!S.cart.length)return `<h2 class="serif" style="font-size:30px">Your cart</h2><div class="panel" style="margin-top:14px">Your cart is empty. <button class="btn" data-go="browse">Browse books</button></div>`;
+ return `<h2 class="serif" style="font-size:30px;margin-bottom:14px">Your cart</h2><div class="cols"><div class="panel tablewrap"><table><tr><th>Book</th><th>Qty</th><th>Price</th><th></th></tr>${S.cart.map(i=>{const b=BOOKS.find(x=>x.id===i.id);return `<tr><td><b>${esc(b.t)}</b><br><span class="muted">${esc(b.a)}</span></td><td><button class="btn alt" data-dec="${b.id}" aria-label="Fewer">−</button> ${i.q} <button class="btn alt" data-add="${b.id}" aria-label="More">+</button></td><td>${money(b.p*i.q)}</td><td><button class="btn alt" data-rm="${b.id}">Remove</button></td></tr>`}).join("")}</table></div>${summary(true)}</div>`};
+function summary(btn){return `<aside class="panel"><h3 style="font-size:18px;margin-bottom:10px">Order summary</h3><table class="sum"><tr><td>Subtotal</td><td align="right">${money(sub())}</td></tr>${S.member?`<tr><td>Rainbow Rewards (10%)</td><td align="right">−${money(disc())}</td></tr>`:""}<tr><td>${S.mode==="collect"?"Click and collect":"Delivery"}</td><td align="right">${ship()?money(ship()):"Free"}</td></tr><tr class="t"><td>Total (incl. GST)</td><td align="right">${money(total())}</td></tr></table><p class="muted" style="font-size:13px">Free delivery over ${money(FREE)}. Click and collect is always free.</p>${btn?`<button class="btn" style="width:100%" data-go="checkout" data-step="1">Checkout</button>`:""}</aside>`}
+function stepbar(){const n=["Delivery","Payment","Review"];return `<ol class="steps">${n.map((x,i)=>`<li class="${S.step===i+1?"now":S.step>i+1?"done":""}">${i+1}. ${x}</li>`).join("")}</ol>`}
+V.checkout=()=>{if(!S.cart.length)return V.cart();let m="";const f=S.f;
+ if(S.step===1)m=`<form id="f1" novalidate><div class="field"><label>How would you like your books?</label>
+ <label class="radio ${S.mode==="deliver"?"on":""}"><input type="radio" name="mode" value="deliver" ${S.mode==="deliver"?"checked":""}><span><b>Home delivery</b><br><span class="muted">2–4 business days</span></span></label>
+ <label class="radio ${S.mode==="collect"?"on":""}"><input type="radio" name="mode" value="collect" ${S.mode==="collect"?"checked":""}><span><b>Click and collect</b><br><span class="muted">Ready in 1 hour, free</span></span></label></div>
+ ${S.mode==="collect"?`<div class="field"><label for="store">Collect from</label><select id="store" name="store">${Object.entries(STORES).map(([k,s])=>`<option value="${k}" ${S.store===k?"selected":""}>${s.n} – ${s.type}</option>`).join("")}</select></div>`:`<div class="field"><label for="addr">Delivery address</label><input id="addr" name="addr" autocomplete="street-address" value="${esc(f.addr||"")}"><div class="err" data-e="addr"></div></div>`}
+ <div class="field"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" value="${esc(f.name||"")}"><div class="err" data-e="name"></div></div>
+ <div class="field"><label for="email">Email for confirmation</label><input id="email" name="email" type="email" autocomplete="email" value="${esc(f.email||"")}"><div class="err" data-e="email"></div></div>
+ <label class="radio"><input type="checkbox" name="member" ${S.member?"checked":""}><span>I'm a Rainbow Rewards member (10% off)</span></label>
+ <button class="btn" type="submit">Continue to payment</button></form>`;
+ if(S.step===2)m=`<form id="f2" novalidate><div class="note" style="margin-bottom:14px">Prototype only: use any made-up details. Nothing is sent or stored.</div>
+ <div class="field"><label>Payment method</label>
+ <label class="radio ${S.pay==="card"?"on":""}"><input type="radio" name="pay" value="card" ${S.pay==="card"?"checked":""}><span><b>Credit or debit card</b></span></label>
+ <label class="radio ${S.pay==="wallet"?"on":""}"><input type="radio" name="pay" value="wallet" ${S.pay==="wallet"?"checked":""}><span><b>Digital wallet</b><br><span class="muted">Handled by the payment gateway</span></span></label></div>
+ ${S.pay==="card"?`<div class="field"><label for="cn">Card number</label><input id="cn" name="cn" inputmode="numeric" placeholder="1234 5678 9012 3456" autocomplete="off"><div class="err" data-e="cn"></div></div><div class="row"><div class="field" style="flex:1 1 120px"><label for="ex">Expiry (MM/YY)</label><input id="ex" name="ex" placeholder="08/29" autocomplete="off"><div class="err" data-e="ex"></div></div><div class="field" style="flex:1 1 120px"><label for="cv">Security code</label><input id="cv" name="cv" inputmode="numeric" placeholder="123" autocomplete="off"><div class="err" data-e="cv"></div></div></div>`:`<p class="muted">You will be sent to your wallet to approve the payment.</p>`}
+ <div class="row"><button class="btn alt" type="button" data-step="1">Back</button><button class="btn" type="submit">Review order</button></div></form>`;
+ if(S.step===3)m=`<div class="panel" style="margin-bottom:14px"><h3 style="font-size:18px;margin-bottom:8px">Review</h3><p style="margin:0">${S.mode==="collect"?"Collect from <b>"+STORES[S.store].n+"</b>":"Deliver to <b>"+esc(f.addr)+"</b>"}<br>${esc(f.name)} · ${esc(f.email)}<br>Paying by ${S.pay==="card"?"card ending "+esc(f.last4||"••••"):"digital wallet"}</p></div><div class="row"><button class="btn alt" data-step="2">Back</button><button class="btn" id="place">Place order – ${money(total())}</button></div>`;
+ return `<h2 class="serif" style="font-size:30px;margin-bottom:10px">Checkout</h2>${stepbar()}<div class="cols"><div class="panel">${m}</div>${summary(false)}</div>`};
+V.confirm=()=>{const o=S.order;return `<div class="panel" style="max-width:640px;margin:10px auto;text-align:center"><div class="tick" style="margin:0 auto 12px" aria-hidden="true">✓</div><h2 class="serif" style="font-size:28px">Thank you, ${esc(o.name.split(" ")[0])}</h2><p>Order <b>${o.no}</b> is confirmed. ${o.mode==="collect"?"We'll email you when it's ready to collect from <b>"+STORES[o.store].n+"</b>.":"Estimated delivery: 2–4 business days."}</p><p class="muted">Total ${money(o.total)} · ${o.items} item${o.items===1?"":"s"}. A confirmation would be emailed to ${esc(o.email)}.</p><div class="note" style="text-align:left">Prototype: no payment was taken and no order exists in any system.</div><p><button class="btn" data-go="home">Continue browsing</button></p></div>`};
+V.stores=()=>`<h2 class="serif" style="font-size:30px;margin-bottom:14px">Find a store</h2><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))">${Object.values(STORES).map(s=>`<div class="panel"><span class="pill">${s.type}</span><h3 style="margin:8px 0 4px;font-size:18px">${s.n}</h3><p class="muted" style="margin:0">${s.addr}<br>${s.hrs}</p></div>`).join("")}</div><p class="muted" style="margin-top:14px">Showing four of 44 stores (26 company-owned and 18 franchise).</p>`;
+V.events=()=>`<h2 class="serif" style="font-size:30px;margin-bottom:14px">In store</h2><div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))">${EVENTS.map((e,i)=>`<div class="panel"><span class="pill">${e.k}</span><h3 style="margin:8px 0 2px;font-size:18px">${e.t}</h3><p class="muted" style="margin:0 0 8px">${e.d} · ${STORES[e.w].n}</p><p>${e.x}</p><button class="btn alt" data-rsvp="${i}">${S.f["rsvp"+i]?"Booked":"Book a place"}</button></div>`).join("")}</div>`;
+V.publishing=()=>`<h2 class="serif" style="font-size:30px;margin-bottom:6px">Rainbow Publishing</h2><p class="muted" style="max-width:60ch">Our publishing arm now offers services to independent authors.</p><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:14px"><div class="panel"><h3>Editing and design</h3><p class="muted">Manuscript assessment, copy-editing, cover and interior design.</p></div><div class="panel"><h3>Print on demand</h3><p class="muted">Print runs from one copy, listed on this site and in selected stores.</p></div><div class="panel"><h3>Launch in store</h3><p class="muted">Signing events and shelf placement in company stores.</p></div></div><div class="panel" style="margin-top:20px;max-width:560px"><h3 style="margin-bottom:10px">Tell us about your book</h3><form id="pf" novalidate><div class="field"><label for="pn">Your name</label><input id="pn"></div><div class="field"><label for="pk">Service</label><select id="pk"><option>Editing</option><option>Design</option><option>Print on demand</option></select></div><div class="field"><label for="pm">Summary</label><textarea id="pm" rows="3"></textarea></div><button class="btn" type="submit">Send enquiry</button><span id="pmsg" class="ok" style="margin-left:10px"></span></form></div>`;
+V.franchise=()=>`<h2 class="serif" style="font-size:30px;margin-bottom:6px">Franchise portal</h2><p class="muted">For Rainbow Books franchisees. Sign-in is simulated in this prototype.</p>${S.f.fr?`<div class="panel"><h3>Malvern franchise – dashboard</h3><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin:12px 0"><div class="card"><span class="muted">Sales this week</span><b class="serif" style="font-size:26px">$18,420</b></div><div class="card"><span class="muted">Open stock orders</span><b class="serif" style="font-size:26px">3</b></div><div class="card"><span class="muted">Low-stock titles</span><b class="serif" style="font-size:26px">5</b></div></div><button class="btn" data-fr="0">Sign out</button></div>`:`<div class="panel" style="max-width:420px"><form id="ff" novalidate><div class="field"><label for="fu">Franchise ID</label><input id="fu" autocomplete="off" placeholder="e.g. MALV-018"></div><div class="field"><label for="fp">Password</label><input id="fp" type="password" autocomplete="off"></div><div class="err" id="fe"></div><button class="btn" type="submit">Sign in</button></form></div>`}`;
+
+function render(){nav();upd();$("#app").innerHTML=V[S.view]();}
+function valid(f){let ok=true;const set=(k,m)=>{const e=document.querySelector(`[data-e=${k}]`);if(e)e.textContent=m||"";if(m)ok=false};return {set,get ok(){return ok}}}
+document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)return;
+ if(t.dataset.go){const x={};if(t.dataset.go==="checkout"){x.step=1}if(t.dataset.go==="browse"){x.query="";x.genre="All";$("#q").value=""}go(t.dataset.go,x);return}
+ if(t.dataset.book){go("book",{bookId:+t.dataset.book});return}
+ if(t.dataset.add){add(+t.dataset.add);if(S.view==="cart")render();return}
+ if(t.dataset.buy){add(+t.dataset.buy);S.mode="collect";go("checkout",{step:1});return}
+ if(t.dataset.dec){const i=S.cart.find(x=>x.id==t.dataset.dec);if(i&&--i.q<1)S.cart=S.cart.filter(x=>x!==i);save();render();return}
+ if(t.dataset.rm){S.cart=S.cart.filter(x=>x.id!=t.dataset.rm);save();render();return}
+ if(t.dataset.step){S.step=+t.dataset.step;if(S.view!=="checkout")S.view="checkout";render();return}
+ if(t.dataset.rsvp){S.f["rsvp"+t.dataset.rsvp]=true;render();toast("Place booked (prototype)");return}
+ if(t.dataset.fr!==undefined){S.f.fr=t.dataset.fr==="1";render();return}
+ if(t.id==="place"){const o={no:"RB-"+(100000+Math.floor(Math.random()*899999)),name:S.f.name,email:S.f.email,mode:S.mode,store:S.store,total:total(),items:total_n()};S.order=o;S.cart=[];save();go("confirm");return}
+ if(t.id==="theme"){const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=dark?"light":"dark";return}
+});
+document.addEventListener("change",e=>{const t=e.target;
+ if(t.id==="gsel"){S.genre=t.value;render()}
+ if(t.name==="mode"&&S.view==="checkout"){S.mode=t.value;captureF();render()}
+ if(t.name==="pay"){S.pay=t.value;render()}
+ if(t.name==="member"){S.member=t.checked;captureF();render()}
+ if(t.name==="store"){S.store=t.value}
+});
+function captureF(){const f=$("#f1");if(!f)return;["addr","name","email"].forEach(k=>{if(f.elements[k])S.f[k]=f.elements[k].value})}
+document.addEventListener("submit",e=>{e.preventDefault();const f=e.target;
+ if(f.id==="sform"){S.query=$("#q").value.trim();S.genre="All";go("browse");return}
+ if(f.id==="f1"){const v=valid();const g=k=>f.elements[k]?f.elements[k].value.trim():"";captureF();
+  if(S.mode==="deliver"&&g("addr").length<6)v.set("addr","Enter your delivery address.");
+  if(g("name").length<2)v.set("name","Enter your name.");
+  if(!/^\S+@\S+\.\S+$/.test(g("email")))v.set("email","Enter a valid email address.");
+  if(v.ok){S.step=2;render()}return}
+ if(f.id==="f2"){const v=valid();if(S.pay==="card"){const n=f.elements.cn.value.replace(/\s/g,"");
+  if(!/^\d{13,19}$/.test(n))v.set("cn","Enter a 13–19 digit card number.");
+  if(!/^(0[1-9]|1[0-2])\/\d{2}$/.test(f.elements.ex.value.trim()))v.set("ex","Use MM/YY.");
+  if(!/^\d{3,4}$/.test(f.elements.cv.value.trim()))v.set("cv","3 or 4 digits.");
+  S.f.last4=n.slice(-4)}
+  if(v.ok){S.step=3;render()}return}
+ if(f.id==="pf"){$("#pmsg").textContent="Thanks – enquiry noted (prototype).";return}
+ if(f.id==="ff"){if(!$("#fu").value.trim()||!$("#fp").value){$("#fe").textContent="Enter your franchise ID and password."}else{S.f.fr=true;render()}return}
+});
+render();
+</script>
+</body></html>
